@@ -58,8 +58,8 @@ namespace Wee {
         }
 
     private:
-        int m_code;
         ArgumentsPtr m_args;
+        int m_code;
     };
 
     class RunInstance;
@@ -129,11 +129,11 @@ namespace Wee {
         void addPrev(WeakPtr stmt);
 
     protected:
+        RunInstance *m_inst;
+        Pipeline *m_pipe;
         StmtType m_type;
         StmtRefs m_posts;
         StmtRefs m_prevs;
-        RunInstance *m_inst;
-        Pipeline *m_pipe;
     };
     typedef Stmt::Ptr StmtPtr;
     typedef Stmt::WeakPtr StmtRef;

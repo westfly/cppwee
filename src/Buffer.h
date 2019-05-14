@@ -7,6 +7,7 @@
 
 #include <assert.h>
 #include <string>
+#include <cstring>
 #include <vector>
 
 class ReadBuffer {

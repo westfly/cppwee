@@ -9,13 +9,14 @@
 namespace Wee {
     StmtRet Merger::execute(StmtRef prev, ArgumentsPtr args) {
         assert(args && prev);
-        m_args[(unsigned) prev] = args;
+        unsigned index = (uint64_t) prev & 0xff;
+        m_args[index] = args;
         if (m_args.size() == m_prevs.size()) {
             ArgumentList::ArgArray array;
             ArgsTable t(m_args);
             std::for_each(m_prevs.begin(), m_prevs.end(), 
                 [&array, t] (WeakPtr ref) -> void {
-                    unsigned key = (unsigned) ref;
+                    unsigned key = (uint64_t) ref & 0xff;
                     auto it = t.find(key);
                     assert(it != t.end());
                     array.push_back(it->second);

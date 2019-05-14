@@ -23,5 +23,5 @@ namespace Wee {
 class ReadBuffer;
 class WriteBuffer;
 
-#pragma warning(disable: 4996)
+//#pragma warning(disable: 4996)
 #endif // CPPWEE_FDECL_H
