@@ -162,7 +162,7 @@ StmtChunkPtr createParallStmts(StmtFactory &fac) {
 //                -> s3 -> s5 -> merger
 void testParallStmts(StmtFactory &fac) { 
     auto chunk = createParallStmts(fac);
-    auto stmt = chunk->head();
+    //auto stmt = chunk->head();
     MyArguments *myarg = new MyArguments();
     myarg->add("lynx");
     Engine::instance().run(chunk, ArgumentsPtr(myarg), 
@@ -178,7 +178,8 @@ void testEncode(StmtFactory &fac) {
     VectorWriteBuffer vbuf(buf);
     chunk->encode(vbuf);
     auto chunk2 = fac.createChunk();
-    bool ret = chunk2->decode(VectorReadBuffer(buf));
+    VectorReadBuffer wbuf(buf);
+    bool ret = chunk2->decode(wbuf);
     assert(ret);
     MyArguments *myarg = new MyArguments();
     myarg->add("lynx");
@@ -246,7 +247,7 @@ void testIfStmts(StmtFactory &fac) {
 StmtChunkPtr createLoopStmts(StmtFactory &fac) {
     StmtChunkPtr chunk = fac.createChunk();
     Cond *cond = new ArgNullCond();
-    StmtRef stmt = chunk->create(STMT_HELLO);
+    //StmtRef stmt = chunk->create(STMT_HELLO);
     IfStmt *ifs = (IfStmt*) chunk->create(ST_IF);
     ifs->setCond(cond);
     ifs->addPost(chunk->create(ST_GOTO))->
